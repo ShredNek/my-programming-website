@@ -1,0 +1,818 @@
+@font-face {
+  font-family: Courier;
+  font-weight: normal;
+  font-style: normal;
+  src: url("./assets/fonts/CourierStd.ttf");
+}
+
+@font-face {
+  font-family: Courier;
+  font-weight: bold;
+  font-style: normal;
+  src: url("./assets/fonts/CourierStd-Bold.ttf");
+}
+
+@font-face {
+  font-family: Courier;
+  font-weight: normal;
+  font-style: italic;
+  src: url("./assets/fonts/CourierStd-Oblique.ttf");
+}
+
+@font-face {
+  font-family: Courier;
+  font-weight: bold;
+  font-style: italic;
+  src: url("./assets/fonts/CourierStd-BoldOblique.ttf");
+}
+
+// ? Globals
+$overlay-black: #000000dc;
+$overlay-grey: #0000006e;
+$overlay-white: #0000003c;
+$main-blue: rgb(81, 196, 254);
+$accent-gold: rgb(245, 206, 63);
+$medium-screen: 750px;
+$small-screen: 500px;
+
+$overlay-gradient-top-to-bot: linear-gradient(
+  $overlay-white,
+  $overlay-grey,
+  $overlay-black,
+  black,
+  black
+);
+$overlay-gradient-right-to-left: linear-gradient(
+  90deg,
+  $overlay-white,
+  $overlay-grey,
+  black
+);
+$overlay-gradient-top-mid-bot: linear-gradient(
+  180deg,
+  black,
+  transparent,
+  transparent,
+  transparent,
+  black
+);
+$main-blue-gradient-left-to-right: linear-gradient(
+  to right,
+  darken($main-blue, $amount: 20%),
+  lighten($main-blue, $amount: 20%)
+);
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Courier;
+  font-weight: 300;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+h1,
+h2,
+p {
+  cursor: default;
+}
+
+a {
+  text-decoration: none;
+}
+
+.heading {
+  margin: 1.5em 0.8em;
+  font-size: clamp(1rem, 0.5vw + 3rem, 8rem);
+  text-align: center;
+}
+
+h1 span {
+  font-style: italic;
+  font-weight: bold;
+  background: $main-blue-gradient-left-to-right;
+  background-position: 0 100%;
+  background-size: 100% 7.5px;
+  background-repeat: repeat-x;
+}
+
+h2 {
+  letter-spacing: 0.1em;
+}
+
+button {
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+section {
+  position: relative;
+  min-height: 500px;
+  height: 100vh;
+  width: 100vw;
+}
+
+.overlay {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background: $overlay-grey;
+  z-index: 1;
+  transition: all 300ms ease-in-out;
+  text-align: center;
+
+  h1,
+  p {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+  }
+
+  p {
+    max-width: 90%;
+  }
+
+  $this: &;
+
+  &:hover {
+    background: $overlay-black;
+
+    h1,
+    p {
+      opacity: 1;
+      transition: opacity 300ms ease-in-out;
+    }
+  }
+
+  @media (max-width: $medium-screen) {
+    h1 {
+      margin: 0.45em !important;
+    }
+  }
+}
+
+// ? Slider Styles
+
+.global-slider {
+  height: min(7.5px, 2rem);
+  box-shadow: 0px 0px 8px 1px lighten($main-blue, $amount: 20%);
+  width: 0%;
+  position: fixed;
+  background: $main-blue-gradient-left-to-right;
+  z-index: 4;
+  transition: width 300ms ease-in-out;
+}
+
+// ? Nav Styles
+
+$nav-height: 300px;
+$nav-sticky-top-offset: -100px;
+
+$hero-section-min-height: 700px;
+
+#nav {
+  position: sticky;
+  top: $nav-sticky-top-offset;
+  height: $nav-height;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  background: linear-gradient(transparent, black, $overlay-black, transparent);
+  z-index: 2;
+
+  a {
+    position: sticky;
+    top: $nav-sticky-top-offset;
+    color: white;
+  }
+
+  @for $i from 1 through 4 {
+    ul a:nth-child(#{$i}) {
+      $this: &;
+
+      & {
+        opacity: 0;
+        animation: fade-in-from-top 1.5s (4s + calc($i / 2)) forwards;
+      }
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    gap: calc(0.25rem + 5vw);
+  }
+
+  ul li {
+    position: relative;
+    margin: 0.5rem;
+    font-size: clamp(0.8rem, 0.25rem + 2vw, 2rem);
+    list-style: none;
+    transition: color .4s ease-in-out;
+  }
+
+  ul li::before {
+    content: "<";
+  }
+
+  ul li::after {
+    content: "/>";
+  }
+
+  $fnt-w: 0.02em;
+  $fnt-blr: 4px;
+
+  .svg-background {
+    position: absolute;
+    inset: 0;
+    transform: translate(-14%, -6%);
+    margin: auto;
+    height: 25px;
+    width: 25px;
+    background: radial-gradient(
+      $main-blue,
+      rgba($main-blue, 0.4),
+      rgba($main-blue, 0.2),
+      transparent,
+      transparent
+    );
+    opacity: 0;
+    z-index: -1;
+    transition: opacity .4s ease-in-out;
+
+  }
+
+  ul li:hover {
+    text-shadow: $fnt-w $fnt-w $fnt-blr $main-blue,
+      (-$fnt-w) $fnt-w $fnt-blr $main-blue, $fnt-w (-$fnt-w) $fnt-blr $main-blue,
+      (-$fnt-w) (-$fnt-w) $fnt-blr $main-blue;
+    transition: 0.4s ease-in-out;
+    cursor: pointer;
+
+    $this: &;
+
+    & .svg-background {
+      opacity: 1;
+      transition: opacity .4s ease-in-out;
+    }
+  }
+
+  .small-screen,
+  .large-medium-screen {
+    display: none;
+  }
+
+  .small-screen {
+    li {
+      display: flex;
+      font-size: clamp(.8em, 5vw, 2em);
+
+      svg {
+        display: block;
+        margin: -1px 2px 0;
+      }
+    }
+  }
+
+  $this: &;
+
+  @media (max-width: calc($small-screen - 1px)) {
+    & .small-screen {
+      display: flex;
+      color: white;
+    }
+  }
+
+  @media (min-width: $small-screen) {
+    & .large-medium-screen {
+      display: flex;
+    }
+  }
+}
+
+// ? Hero Styles
+
+#hero {
+  // ? This determines how far from the bottom the navbar prints,
+  margin-bottom: -$nav-height;
+  min-height: $hero-section-min-height;
+
+  // ? Visualiser Section Styles
+  .overlay--hero .text {
+    position: absolute;
+    display: flex;
+    height: 100vh;
+    min-height: $hero-section-min-height;
+    min-width: 100vw;
+    margin: 0;
+    flex-direction: column;
+    place-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    background: $overlay-gradient-top-to-bot;
+    z-index: 1;
+
+    h1 {
+      font-size: clamp(1rem, 3vw + 1rem, 4rem);
+      font-weight: bold;
+    }
+
+    h2 {
+      margin: 3em 3em;
+      font-style: italic;
+      font-size: clamp(1rem, 2vw + 0.5rem, 2rem);
+    }
+  }
+}
+
+video {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  filter: blur(3px);
+  z-index: -1;
+}
+
+.typewriter {
+  max-width: max-content;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid white; /* The typewriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em; /* Adjust as needed */
+  animation: typing 4s steps(35, end), blink-caret 0.75s step-end infinite;
+}
+
+.fade-in {
+  animation: fade-in-float 5s;
+}
+
+// ? Spinner Styles
+
+.spinner {
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  i {
+    border: 20px solid;
+    border-color: white white white rgb(121, 185, 219);
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    display: inline-block;
+  }
+}
+
+// ? About Styles
+
+#about-me {
+  background-color: black;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  min-height: 850px;
+  height: 100vh;
+
+  .img-overlay {
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    background: $overlay-gradient-right-to-left;
+    z-index: 1;
+
+    $this: &;
+
+    &.vertical {
+      background: $overlay-gradient-top-mid-bot;
+      z-index: 1;
+    }
+  }
+
+  img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    object-fit: cover;
+    height: 100%;
+    width: 50%;
+    transform: scaleX(-1);
+    filter: grayscale(25%);
+  }
+
+  .bio {
+    z-index: 1;
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+
+    h1,
+    h1 span {
+      margin: max(60px, 1.75em) 0 2rem;
+      font-size: clamp(1rem, 1vw + 5rem, 14rem);
+      color: white;
+    }
+
+    p {
+      font-size: clamp(0.75rem, 0.5rem + 1.2vw, 6rem);
+      letter-spacing: 0.1em;
+      text-align: justify;
+    }
+  }
+}
+
+// ? Portfolio Styles
+
+#portfolio {
+  display: flow-root;
+  position: static;
+  height: auto;
+  min-height: 850px;
+
+  .rounded {
+    border-radius: 5px;
+  }
+
+  img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  h1 {
+    margin: 3.25em 0.8em 1.5em;
+  }
+
+  p {
+    font-size: clamp(1rem, 2vw, 1.6rem);
+    width: 80%;
+    text-align: justify;
+    margin: 1.5em 0.8em;
+  }
+
+  .grid-container {
+    $padding-and-gap: 1.5rem;
+
+    display: grid;
+    background-color: white;
+    padding: $padding-and-gap;
+    gap: $padding-and-gap;
+    min-height: 1100px;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 3rem;
+    grid-template-areas:
+      "showcase showcase sub-showcase-1 mini-1"
+      "showcase showcase sub-showcase-1 sub-showcase-2"
+      "subtitle subtitle subtitle sub-showcase-2"
+      "mini-2 mini-3 mini-4 mini-5";
+    grid-auto-columns: 1fr;
+
+    @media (max-width: $medium-screen) {
+      grid-template-areas:
+        "showcase showcase"
+        "showcase showcase"
+        "sub-showcase-1 mini-1"
+        "sub-showcase-1 sub-showcase-2"
+        "subtitle sub-showcase-2"
+        "mini-2 mini-3"
+        "mini-4 mini-5";
+    }
+
+    .showcase,
+    .sub-showcase-1,
+    .sub-showcase-2,
+    .mini-1,
+    .mini-2,
+    .mini-3,
+    .mini-4,
+    .mini-5 {
+      width: 100%;
+      display: flex;
+      position: relative;
+      place-content: center;
+      align-items: center;
+      border-radius: 5px;
+      transition: scale 500ms ease-out;
+      scale: 0.98;
+
+      h1 {
+        margin: 0em;
+      }
+
+      $this: &;
+
+      &:hover {
+        scale: 1.02;
+      }
+    }
+
+    .showcase {
+      grid-area: showcase;
+    }
+
+    .sub-showcase-1,
+    .sub-showcase-2 {
+      h1 {
+        font-size: clamp(1.5rem, 4vw, 3rem);
+      }
+
+      p {
+        font-size: clamp(0.8rem, 1vw, 1.2rem);
+      }
+    }
+
+    .sub-showcase-1 {
+      grid-area: sub-showcase-1;
+    }
+
+    .sub-showcase-2 {
+      grid-area: sub-showcase-2;
+    }
+
+    .subtitle {
+      display: flex;
+      position: relative;
+      place-content: center;
+      align-items: center;
+      grid-area: subtitle;
+      color: black;
+      text-shadow: 3px 2px 10px lighten($main-blue, $amount: 10%),
+        -6px -4px 40px adjust-hue($main-blue, 25deg);
+      text-align: center;
+
+      h2 {
+        font-size: clamp(1rem, 5vw, 4rem + 0.75vw);
+        font-weight: bold;
+        font-style: italic;
+      }
+    }
+
+    @for $i from 1 through 5 {
+      .mini-#{$i} {
+        grid-area: mini-#{$i};
+
+        h1 {
+          font-size: clamp(1.5rem, 4vw, 2rem);
+        }
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+// ? Contact Styles
+
+::placeholder {
+  color: white;
+  opacity: 0.75;
+}
+
+#contact-me {
+  display: flow-root;
+  height: fit-content;
+
+  h1,
+  h2 {
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 5rem;
+
+    .row-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      min-height: 100px;
+
+      i {
+        font-size: 2em;
+        height: 38px;
+        width: 32px;
+        margin: auto 0.8rem;
+      }
+    }
+
+    input,
+    textarea {
+      border: white 2.5px solid;
+      border-radius: 5px;
+      background: black;
+      min-width: 100%;
+      color: white;
+      margin-bottom: 0.5em;
+      padding: 0.8em;
+      padding-left: 3em;
+      font-size: 0.9em;
+    }
+
+    .two-form-items,
+    .form-item {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+
+      label {
+        width: 100%;
+        position: relative;
+
+        i {
+          height: fit-content;
+          width: 40px;
+          inset: 0;
+          margin: auto 0;
+          font-size: 1.5em;
+          display: block;
+          position: absolute;
+          padding-left: 0.5em;
+          z-index: 0;
+        }
+      }
+    }
+
+    .two-form-items {
+      label:first-child {
+        margin-right: 0.5em;
+      }
+
+      @media (max-width: 750px) {
+        flex-direction: column;
+
+        label:first-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .form-item {
+      width: 100%;
+
+      input,
+      textarea {
+        width: 100%;
+      }
+    }
+
+    label[for="message"] {
+      i {
+        margin-top: 0.3em;
+      }
+    }
+
+    textarea {
+      max-width: 100%;
+      min-height: 150px;
+      max-height: 300px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      height: fit-content;
+      font-weight: bold;
+      font-size: 2em;
+      padding: 0.5em 0 0.4em;
+      margin: auto;
+    }
+  }
+}
+
+.submit-message {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: $main-blue;
+  width: 500px;
+  height: 100px;
+  border-radius: 5px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 500ms ease-out;
+
+  button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    right: 0;
+    top: 10px;
+    font-size: 1.4em;
+    height: 50px;
+    width: 50px;
+    background-color: transparent;
+    color: white;
+  }
+
+  h1,
+  h2 {
+    text-align: center;
+    width: fit-content;
+  }
+
+  $this: &;
+
+  &.failed {
+    background-color: red;
+
+    h2 {
+      font-size: 1em;
+    }
+  }
+
+  &.false {
+    opacity: 0;
+    transition: 500 500ms z-index;
+    z-index: 0;
+  }
+
+  &.true {
+    opacity: 1;
+  }
+}
+
+/* The typing effect */
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  25% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: white;
+  }
+}
+
+@keyframes fade-in-float {
+  0%,
+  66% {
+    color: transparent;
+    transform: translateY(-70px);
+  }
+  100% {
+    color: white;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fade-in-from-top {
+  from {
+    transform: translate(0, -70px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}

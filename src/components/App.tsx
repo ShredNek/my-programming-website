@@ -6,6 +6,7 @@ import Nav from "./Nav";
 import Slider from "./Slider";
 import Portfolio from "./Portfolio";
 import Contact from "./Contact";
+import Principals from "./Principles";
 
 export default function App() {
   // ? Component States
@@ -48,6 +49,7 @@ export default function App() {
       <Hero />
       <Nav />
       <About />
+      <Principals />
       <Portfolio />
       <Contact />
     </main>

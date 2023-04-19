@@ -34,18 +34,19 @@ export default function Portfolio() {
         />
         <PortfolioItem
           className="sub-showcase-2"
-          image={JacketImg}
-          projectName="Do I Need A Jacket?"
-          projectDescription="Using vanilla CSS and ReactTS, I wanted to make this app to create a nice visual experience, complete with a loading screen and toggle-switching units of temperature to the users desire, controlled with useState."
-          projectLink="https://do-i-need-a-jacket-2f8d2.web.app/"
+          image={RocImg}
+          projectName="Daniel Lee™ Music"
+          projectLink="https://daniel-lee-music-roc.web.app"
+          projectDescription="Using ReactTS and TypeScript, I have put together a website to showcase my UX/UI skills - and my music - in a sleek, stylish and responsive way."
         />
         <div className="subtitle">
           <h2>Click on a project!</h2>
         </div>
         <PortfolioItem
           className="mini-1"
-          image={RocImg}
-          projectName="Daniel Lee™ Music"
+          image={JacketImg}
+          projectName="Do I Need A Jacket?"
+          projectLink="https://do-i-need-a-jacket-2f8d2.web.app/"
         />
         <PortfolioItem
           className="mini-2"

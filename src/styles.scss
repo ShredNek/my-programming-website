@@ -30,10 +30,12 @@
 $overlay-black: #000000dc;
 $overlay-grey: #0000006e;
 $overlay-white: #0000003c;
+$white-overlay-strong: rgba(255, 255, 255, 0.9);
 $main-blue: rgb(81, 196, 254);
 $accent-gold: rgb(245, 206, 63);
 $medium-screen: 750px;
 $small-screen: 500px;
+$lightly-rounded: 5px;
 
 $overlay-gradient-top-to-bot: linear-gradient(
   $overlay-white,
@@ -51,9 +53,11 @@ $overlay-gradient-right-to-left: linear-gradient(
 $overlay-gradient-top-mid-bot: linear-gradient(
   180deg,
   black,
+  $overlay-grey,
   transparent,
   transparent,
-  transparent,
+  $overlay-grey,
+  black,
   black
 );
 $main-blue-gradient-left-to-right: linear-gradient(
@@ -113,7 +117,7 @@ h2 {
 button {
   background-color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: $lightly-rounded;
 }
 
 section {
@@ -193,7 +197,15 @@ $hero-section-min-height: 700px;
   justify-content: space-around;
   align-items: center;
   color: white;
-  background: linear-gradient(transparent, black, $overlay-black, transparent);
+  background: linear-gradient(
+    transparent,
+    black,
+    $overlay-black,
+    $overlay-black,
+    $overlay-white,
+    transparent,
+    transparent
+  );
   z-index: 2;
 
   a {
@@ -224,7 +236,7 @@ $hero-section-min-height: 700px;
     margin: 0.5rem;
     font-size: clamp(0.8rem, 0.25rem + 2vw, 2rem);
     list-style: none;
-    transition: color .4s ease-in-out;
+    transition: color 0.4s ease-in-out;
   }
 
   ul li::before {
@@ -254,8 +266,7 @@ $hero-section-min-height: 700px;
     );
     opacity: 0;
     z-index: -1;
-    transition: opacity .4s ease-in-out;
-
+    transition: opacity 0.4s ease-in-out;
   }
 
   ul li:hover {
@@ -269,7 +280,7 @@ $hero-section-min-height: 700px;
 
     & .svg-background {
       opacity: 1;
-      transition: opacity .4s ease-in-out;
+      transition: opacity 0.4s ease-in-out;
     }
   }
 
@@ -281,7 +292,7 @@ $hero-section-min-height: 700px;
   .small-screen {
     li {
       display: flex;
-      font-size: clamp(.8em, 5vw, 2em);
+      font-size: clamp(0.8em, 5vw, 2em);
 
       svg {
         display: block;
@@ -443,6 +454,223 @@ video {
   }
 }
 
+// ? Principal Styles
+
+$scroll-durations: 20s;
+$tiny-screen-height: 700px;
+
+@keyframes scroll-right {
+  from {
+    left: 0;
+  }
+  to {
+    left: -100%;
+  }
+}
+
+@keyframes scroll-left {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0;
+  }
+}
+
+@keyframes scroll-down {
+  from {
+    bottom: 0px;
+  }
+  to {
+    bottom: $tiny-screen-height;
+  }
+}
+
+#principles {
+  display: flow-root;
+  background-color: white;
+  height: fit-content;
+
+  h1 {
+    margin-top: 200px;
+    font-size: clamp(2.5rem, 3vw, 5rem + 4vw);
+    text-align: center;
+    color: black;
+  }
+
+  h2 {
+    color: black;
+    font-size: clamp(1.25rem, 2.5vw, 3rem + 3.5vw);
+    text-align: center;
+  }
+
+  #general-principles {
+    display: flow-root;
+    overflow: hidden;
+
+    .screen {
+      position: relative;
+    }
+
+    .screen.big,
+    .screen.medium {
+      width: 200%;
+    }
+
+    .screen.big {
+      animation: infinite linear scroll-right $scroll-durations;
+    }
+
+    .screen.medium.top {
+      animation: infinite linear scroll-right $scroll-durations;
+
+      div {
+        margin-bottom: 0;
+      }
+    }
+
+    .screen.medium.bottom {
+      animation: infinite linear scroll-left $scroll-durations;
+    }
+
+    .screen.tiny {
+      flex-direction: column;
+      overflow-y: hidden;
+    }
+
+    .row-container {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .children div h3 {
+      font-weight: bold;
+    }
+
+    .children,
+    .row-1,
+    .row-2 {
+      width: 100%;
+      color: black;
+      margin: 3rem 0;
+      display: flex;
+      flex-direction: row;
+      place-content: space-evenly;
+      gap: 2.5%;
+      padding: 1em 1.25%;
+      text-align: center;
+    }
+
+    .children.repeated,
+    .row-1.repeated,
+    .row-2.repeated {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .children.medium {
+      flex-direction: row;
+    }
+
+    .children.medium > div {
+      margin-top: 1em;
+      margin-bottom: 1em;
+
+      div {
+        height: 150px;
+      }
+    }
+
+    .father {
+      height: $tiny-screen-height;
+      position: relative;
+      animation: infinite linear scroll-down $scroll-durations;
+    }
+
+    .white-overlay {
+      display: flow-root;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 1;
+      background: linear-gradient(
+        white,
+        $white-overlay-strong,
+        transparent,
+        $white-overlay-strong,
+        white
+      );
+    }
+
+    .children.tiny {
+      z-index: 0;
+      flex-direction: column;
+      padding: 1em;
+      gap: 1em;
+      margin: 0;
+
+      div {
+        height: 100px;
+      }
+
+      &.repeated {
+        padding-top: 0;
+      }
+    }
+
+    .big,
+    .medium,
+    .tiny {
+      display: none;
+    }
+
+    .row-1,
+    .row-2 {
+      padding: 0;
+      flex-direction: row;
+      width: 100%;
+    }
+
+    // !!! INDIVIDUAL CHILD
+    .principle-card {
+      height: 200px;
+      width: 100%;
+      border-radius: $lightly-rounded;
+      border: 2px solid black;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1em;
+      font-size: clamp(1rem, 0.25rem + 0.6vw, 1.4rem);
+    }
+
+    @media (min-width: 280px) {
+      .tiny {
+        display: flex;
+      }
+    }
+    @media (min-width: 700px) {
+      .medium {
+        display: flex;
+      }
+
+      .tiny {
+        display: none;
+      }
+    }
+    @media (min-width: 1400px) {
+      .big {
+        display: flex;
+      }
+
+      .medium {
+        display: none;
+      }
+    }
+  }
+}
+
 // ? Portfolio Styles
 
 #portfolio {
@@ -452,7 +680,7 @@ video {
   min-height: 850px;
 
   .rounded {
-    border-radius: 5px;
+    border-radius: $lightly-rounded;
   }
 
   img {
@@ -463,11 +691,11 @@ video {
     object-fit: cover;
     height: 100%;
     width: 100%;
-    border-radius: 5px;
+    border-radius: $lightly-rounded;
   }
 
   h1 {
-    margin: 3.25em 0.8em 1.5em;
+    margin: 2em 0.8em;
   }
 
   p {
@@ -519,7 +747,7 @@ video {
       position: relative;
       place-content: center;
       align-items: center;
-      border-radius: 5px;
+      border-radius: $lightly-rounded;
       transition: scale 500ms ease-out;
       scale: 0.98;
 
@@ -535,13 +763,21 @@ video {
     }
 
     .showcase {
+      h1 {
+        font-size: clamp(1.5rem, 3.5vw, 4rem);
+        font-style: italic;
+        font-weight: bold;
+      }
       grid-area: showcase;
     }
 
     .sub-showcase-1,
     .sub-showcase-2 {
       h1 {
-        font-size: clamp(1.5rem, 4vw, 3rem);
+        width: 80%;
+        font-size: clamp(1.5rem, 3vw, 3rem);
+        font-style: italic;
+        font-weight: bold;
       }
 
       p {
@@ -580,7 +816,9 @@ video {
         grid-area: mini-#{$i};
 
         h1 {
-          font-size: clamp(1.5rem, 4vw, 2rem);
+          font-size: clamp(1rem, 3vw, 2rem);
+          font-style: italic;
+          font-weight: bold;
         }
 
         p {
@@ -633,7 +871,7 @@ video {
     input,
     textarea {
       border: white 2.5px solid;
-      border-radius: 5px;
+      border-radius: $lightly-rounded;
       background: black;
       min-width: 100%;
       color: white;
@@ -723,7 +961,7 @@ video {
   background-color: $main-blue;
   width: 500px;
   height: 100px;
-  border-radius: 5px;
+  border-radius: $lightly-rounded;
   z-index: 3;
   display: flex;
   flex-direction: column;

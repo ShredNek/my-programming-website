@@ -112,7 +112,7 @@ export const PRINCIPLES: AllPrinciples = {
   },
   programmingApproaches: {
     functional: {
-      headingText: "functional",
+      headingText: "Functional Programming",
       principles: {
         separationOfConcern: {
           headingText: "Separation of Concern",

@@ -1,9 +1,9 @@
-interface IndividualPrincipalInterface {
+export interface IndividualPrincipalInterface {
   headingText: string;
   description: string;
 }
 
-interface FePrinciplesInterface {
+export interface FePrinciplesInterface {
   sixSecondRule: IndividualPrincipalInterface;
   contrast: IndividualPrincipalInterface;
   seo: IndividualPrincipalInterface;
@@ -12,7 +12,7 @@ interface FePrinciplesInterface {
   designPatterns: IndividualPrincipalInterface;
 }
 
-interface GeneralPrinciplesInterface {
+export interface GeneralPrinciplesInterface {
   dry: IndividualPrincipalInterface;
   yagni: IndividualPrincipalInterface;
   readableOverConcise: IndividualPrincipalInterface;
@@ -21,25 +21,29 @@ interface GeneralPrinciplesInterface {
   tdd: IndividualPrincipalInterface;
 }
 
-interface ProgrammingApproachesInterface {
+export interface FunctionalProgrammingPrinciplesInterface {
+  separationOfConcern: IndividualPrincipalInterface;
+  pureFunctions: IndividualPrincipalInterface;
+  abstraction: IndividualPrincipalInterface;
+}
+
+export interface OopProgrammingPrinciplesInterface {
+  theBigFour: IndividualPrincipalInterface;
+  solid: IndividualPrincipalInterface;
+}
+
+export interface ProgrammingApproachesInterface {
   functional: {
     headingText: string;
-    principles: {
-      separationOfConcern: IndividualPrincipalInterface;
-      pureFunctions: IndividualPrincipalInterface;
-      abstraction: IndividualPrincipalInterface;
-    };
+    principles: FunctionalProgrammingPrinciplesInterface;
   };
   oop: {
     headingText: string;
-    principles: {
-      theBigFour: IndividualPrincipalInterface;
-      solid: IndividualPrincipalInterface;
-    };
+    principles: OopProgrammingPrinciplesInterface;
   };
 }
 
-interface AllPrinciples {
+export interface AllPrinciples {
   generalPrinciples: GeneralPrinciplesInterface;
   frontEndPrinciples: FePrinciplesInterface;
   programmingApproaches: ProgrammingApproachesInterface;
@@ -115,7 +119,7 @@ export const PRINCIPLES: AllPrinciples = {
       headingText: "Functional Programming",
       principles: {
         separationOfConcern: {
-          headingText: "Separation of Concern",
+          headingText: "Separation Of Concern",
           description:
             "On of my favourite things about functional programming is seeing how we can break apart complex procedures into smaller, easier to understand segments. This makes refactoring, reshaping, and reading the code much easier to understand - so long as the programmer has created self documenting code...",
         },

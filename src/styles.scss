@@ -184,14 +184,12 @@ section {
 
 // ? Nav Styles
 
-$nav-height: calc(200px);
-$nav-sticky-top-offset: -50px;
-
+$nav-height: 75px;
 $hero-section-min-height: 700px;
 
 #nav {
   position: sticky;
-  top: $nav-sticky-top-offset;
+  top: 0px;
   height: $nav-height;
   width: 100%;
   display: flex;
@@ -206,8 +204,9 @@ $hero-section-min-height: 700px;
 
   a {
     position: sticky;
-    top: $nav-sticky-top-offset;
     color: white;
+    margin-top: 50px;
+    text-shadow: 1px 1px 10px black;
   }
 
   @for $i from 1 through 4 {
@@ -225,6 +224,8 @@ $hero-section-min-height: 700px;
     display: flex;
     flex-direction: row;
     gap: calc(0.25rem + 5vw);
+    transition: all 0.4s ease-in-out;
+
   }
 
   ul li {
@@ -233,6 +234,8 @@ $hero-section-min-height: 700px;
     font-size: clamp(0.8rem, 0.25rem + 2vw, 2rem);
     list-style: none;
     transition: color 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+
   }
 
   ul li::before {
@@ -269,7 +272,6 @@ $hero-section-min-height: 700px;
     text-shadow: $fnt-w $fnt-w $fnt-blr $main-blue,
       (-$fnt-w) $fnt-w $fnt-blr $main-blue, $fnt-w (-$fnt-w) $fnt-blr $main-blue,
       (-$fnt-w) (-$fnt-w) $fnt-blr $main-blue;
-    transition: 0.4s ease-in-out;
     cursor: pointer;
 
     $this: &;
@@ -317,7 +319,7 @@ $hero-section-min-height: 700px;
 
 #hero {
   // ? This determines how far from the bottom the navbar prints,
-  margin-bottom: -$nav-height;
+  margin-bottom: calc(-100px - $nav-height);
   min-height: $hero-section-min-height;
 
   // ? Visualiser Section Styles

@@ -1,5 +1,4 @@
-import { useRef, useEffect } from "react";
-import DanImage from "../assets/media/DanStands_V2.jpg";
+import DanImage from "../assets/media/DanStands_V4.jpg";
 
 const getCurrYear = () => {
   return new Date().getFullYear();

@@ -115,8 +115,10 @@ export default function Principals() {
               }`}
             >
               <div className="icon-heading-buttons">
-                <TbLambda className="icon" />
-                <h3>{functionalProgrammingObjValue.headingText}</h3>
+                <div className="icon-and-heading">
+                  <h3>{functionalProgrammingObjValue.headingText}</h3>
+                  <TbLambda className="icon" />
+                </div>
                 <fieldset className="button-container" name="functional">
                   <button
                     onClick={handleClick}
@@ -165,8 +167,10 @@ export default function Principals() {
               }`}
             >
               <div className="icon-heading-buttons">
-                <TbBraces className="icon" />
-                <h3>{oopProgrammingObjValue.headingText}</h3>
+                <div className="icon-and-heading">
+                  <TbBraces className="icon" />
+                  <h3>{oopProgrammingObjValue.headingText}</h3>
+                </div>
                 <fieldset className="button-container" name="oop">
                   <button onClick={handleClick} name="oop" id="solid">
                     {oopProgrammingObjValue.principles.solid.headingText}

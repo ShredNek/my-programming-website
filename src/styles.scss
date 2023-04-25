@@ -53,12 +53,10 @@ $overlay-gradient-right-to-left: linear-gradient(
 );
 $overlay-gradient-top-mid-bot: linear-gradient(
   180deg,
-  black,
+  black 15%,
   $overlay-grey,
   transparent,
-  transparent,
   $overlay-grey,
-  black,
   black
 );
 $main-blue-gradient-left-to-right: linear-gradient(
@@ -196,10 +194,7 @@ $hero-section-min-height: 700px;
   justify-content: space-around;
   align-items: center;
   color: white;
-  background: linear-gradient(
-    black,
-    transparent
-  );
+  background: linear-gradient(black, transparent);
   z-index: 2;
 
   a {
@@ -225,7 +220,6 @@ $hero-section-min-height: 700px;
     flex-direction: row;
     gap: calc(0.25rem + 5vw);
     transition: all 0.4s ease-in-out;
-
   }
 
   ul li {
@@ -235,7 +229,6 @@ $hero-section-min-height: 700px;
     list-style: none;
     transition: color 0.4s ease-in-out;
     transition: all 0.4s ease-in-out;
-
   }
 
   ul li::before {
@@ -339,7 +332,7 @@ $hero-section-min-height: 700px;
     z-index: 1;
 
     h1 {
-      font-size: clamp(1rem, 3vw + 1rem, 4rem);
+      font-size: clamp(0.8rem, 3vw + 0.8rem, 4rem);
       font-weight: bold;
     }
 
@@ -376,33 +369,15 @@ video {
   animation: fade-in-float 5s;
 }
 
-// ? Spinner Styles
-
-.spinner {
-  height: 100%;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  i {
-    border: 20px solid;
-    border-color: white white white rgb(121, 185, 219);
-    border-radius: 50%;
-    height: 200px;
-    width: 200px;
-    display: inline-block;
-  }
-}
-
 // ? About Styles
 
 #about-me {
   background-color: black;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  min-height: 850px;
-  height: 100vh;
+  min-height: max(100vh, 850px);
+  height: fit-content;
+  padding-bottom: 4em;
 
   .img-overlay {
     height: 100%;
@@ -427,8 +402,14 @@ video {
     object-fit: cover;
     height: 100%;
     width: 50%;
-    transform: scaleX(-1);
     filter: grayscale(25%);
+
+    $this: &;
+
+    // This flips the image when the screen is too small
+    @media (min-width: $small-screen) {
+      transform: scaleX(-1);
+    }
   }
 
   .bio {
@@ -666,8 +647,8 @@ $tiny-screen-height: 700px;
     .programming-approach-container {
       min-height: 500px;
       height: 625px;
-
       display: flex;
+      flex-shrink: 1;
       flex-direction: row;
       justify-content: space-evenly;
       gap: 5%;
@@ -684,7 +665,7 @@ $tiny-screen-height: 700px;
       }
 
       h3 {
-        margin: 5em 0 2.5em;
+        margin: 4em 0 1.5em;
         color: black;
         font-weight: bold;
         z-index: 1;
@@ -696,17 +677,12 @@ $tiny-screen-height: 700px;
         align-items: center;
         min-width: 600px;
         width: 50%;
-        min-height: fit-content;
+        min-height: 100px;
         margin: 4rem 0;
         border: $tracing-grey 2px solid;
         border-radius: 15px;
         overflow-y: hidden;
-        height: 300px;
         transition: height 500ms ease-in-out;
-
-        &.open {
-          height: 500px;
-        }
 
         .icon-heading-buttons,
         .answer-section {
@@ -714,9 +690,9 @@ $tiny-screen-height: 700px;
         }
 
         .icon-heading-buttons {
+          margin-top: 2em;
           position: relative;
-          min-height: 300px;
-          height: fit-content;
+          height: 250px;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -724,22 +700,42 @@ $tiny-screen-height: 700px;
           text-align: center;
           z-index: 1;
 
-          .icon {
-            position: absolute;
-            top: 20px;
-            font-size: 10em;
-            color: lighten($tracing-grey, 10%);
-            z-index: 0;
+          .icon-and-heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+            width: 100%;
+
+            h3,
+            .icon {
+              position: absolute;
+            }
+            h3 {
+              margin: 0rem;
+              color: black;
+              font-weight: bold;
+              z-index: 1;
+          font-size: clamp(.75em, .5em + 1.5vw, 1.75em);
+
+            }
+
+            .icon {
+              font-size: 10em;
+              color: lighten($tracing-grey, 10%);
+              z-index: 0;
+            }
           }
 
           .button-container {
             display: flex;
             place-content: space-around;
-            margin: 3rem 0;
+            margin: 1rem 0 2rem;
             width: 100%;
             border: none;
 
             button {
+              height: 50px;
               border: $main-blue 2px solid;
               box-shadow: -5px -8px 15px -10px adjust-hue($main-blue, -10deg),
                 2px 5px 15px 0px adjust-hue($main-blue, 15deg);
@@ -763,9 +759,10 @@ $tiny-screen-height: 700px;
         .answer-section {
           color: black;
           position: relative;
-          padding: 2em 0 0;
+          padding: 1.5em 0 1em;
           text-align: justify;
           height: fit-content;
+          font-size: clamp(.5em, .5em + 1.5vw, 1em);
 
           &::before {
             content: "";
@@ -784,6 +781,28 @@ $tiny-screen-height: 700px;
       .tiny {
         display: flex;
       }
+
+      .programming-approach-container .programming-approach {
+        min-width: 80%;
+        height: 425px;
+
+        .icon-heading-buttons {
+          min-height: 400px;
+        }
+
+        .button-container {
+          flex-direction: column;
+          align-items: center;
+
+          button {
+            margin: 1em;
+          }
+        }
+
+        &.open {
+          height: 700px;
+        }
+      }
     }
     @media (min-width: 700px) {
       .medium {
@@ -792,6 +811,25 @@ $tiny-screen-height: 700px;
 
       .tiny {
         display: none;
+      }
+
+      .programming-approach-container .programming-approach {
+        min-width: 0;
+        width: 80%;
+        height: 275px;
+        height: 275px;
+
+        .icon-heading-buttons {
+          min-height: 250px;
+        }
+
+        .button-container {
+          flex-direction: row;
+        }
+
+        &.open {
+          height: 500px;
+        }
       }
     }
     @media (min-width: 1400px) {

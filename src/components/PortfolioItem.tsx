@@ -14,7 +14,6 @@ export default function PortfolioItem({
   projectLink,
 }: PortfolioItemInterface) {
   function handleClick() {
-    console.log(projectLink);
     projectLink ? window.open(projectLink, "_blank") : null;
   }
 

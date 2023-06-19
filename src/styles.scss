@@ -330,6 +330,15 @@ $hero-section-min-height: 700px;
     color: white;
     background: $overlay-gradient-top-to-bot;
     z-index: 1;
+    transition: background-color ease-in-out 2s;
+
+    &.blackened {
+      background-color: black;
+    }
+
+    &.loaded {
+      background-color: transparent;
+    }
 
     h1 {
       font-size: clamp(0.8rem, 3vw + 0.8rem, 4rem);
@@ -872,7 +881,7 @@ $tiny-screen-height: 700px;
   }
 
   p {
-    font-size: clamp(1rem, 2vw, 1.6rem);
+    font-size: clamp(1rem, 2vw, 1.2rem);
     width: 80%;
     text-align: justify;
     margin: 1.5em 0.8em;
@@ -937,9 +946,10 @@ $tiny-screen-height: 700px;
 
     .showcase {
       h1 {
-        font-size: clamp(1.5rem, 3.5vw, 4rem);
+        font-size: clamp(1.5rem, 3.5vw, 2rem);
         font-style: italic;
         font-weight: bold;
+        margin: 3rem 0rem 0rem;
       }
       grid-area: showcase;
     }

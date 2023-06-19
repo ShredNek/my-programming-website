@@ -1,12 +1,12 @@
 import PortfolioItem from "./PortfolioItem";
 import StylaImg from "../assets/media/Styla.png";
-import DonutImg from "../assets/media/YearOfTheDonut.png";
 import JacketImg from "../assets/media/DoINeedAJacket.png";
 import KyberImg from "../assets/media/KyberCorp.png";
 import MetronomeImg from "../assets/media/Metronome.png";
 import PigLatinImg from "../assets/media/PigLatin.png";
 import TetrisImg from "../assets/media/Tetris.png";
 import RocImg from "../assets/media/COMING_SOON.png";
+import RocMerchImg from "../assets/media/RocMerch.png";
 
 export default function Portfolio() {
   return (
@@ -17,20 +17,25 @@ export default function Portfolio() {
       <div className="grid-container rounded">
         <PortfolioItem
           className="showcase"
-          image={StylaImg}
-          projectName="Styla"
-          projectDescription="This project is my capstone piece of my portfolio, as it demonstrates
-          many advanced animations, hover and idle front-end effects, as well as
-          my ability to layout a page in pure HTML and CSS."
-          projectLink="https://styla-landing-page.web.app/"
+          image={RocMerchImg}
+          projectName="Ripples Of Change™ - Merchandise"
+          projectDescription="I created a feature-rich web application by 
+          harnessing the power of Vue.js, Spring Boot, and MySQL. By utilizing 
+          Typescript and Vue state management with Pinia, implementing a custom 
+          RESTful API in Spring Boot, and integrating email functionality, I 
+          successfully enhanced the user experience while optimizing business 
+          operations.
+          "
+          projectLink="https://roc-merch-fullstack.web.app/"
         />
         <PortfolioItem
           className="sub-showcase-1"
-          image={DonutImg}
-          projectName="Year Of The Donut"
-          projectDescription="
-          This application was built to showcase a full Mongo, Express, ReactTS and NodeJS stack, with Create Read Update Delete capabilities on backend data."
-          projectLink="https://year-of-the-donut.web.app/"
+          image={StylaImg}
+          projectName="Styla"
+          projectDescription="This project is my demonstration of building a project from the ground up,
+          creating sleek animations, hover and idle front-end effects, as well as
+          demonstrating my fundamentals to layout a page in pure HTML and CSS."
+          projectLink="https://styla-landing-page.web.app/"
         />
         <PortfolioItem
           className="sub-showcase-2"

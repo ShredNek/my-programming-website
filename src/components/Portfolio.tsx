@@ -1,6 +1,6 @@
 import PortfolioItem from "./PortfolioItem";
 import StylaImg from "../assets/media/Styla.png";
-import JacketImg from "../assets/media/DoINeedAJacket.png";
+import VoizerImg from "../assets/media/Voizer.png";
 import KyberImg from "../assets/media/KyberCorp.png";
 import MetronomeImg from "../assets/media/Metronome.png";
 import PigLatinImg from "../assets/media/PigLatin.png";
@@ -30,12 +30,10 @@ export default function Portfolio() {
         />
         <PortfolioItem
           className="sub-showcase-1"
-          image={StylaImg}
-          projectName="Styla"
-          projectDescription="This project is my demonstration of building a project from the ground up,
-          creating sleek animations, hover and idle front-end effects, as well as
-          demonstrating my fundamentals to layout a page in pure HTML and CSS."
-          projectLink="https://styla-landing-page.web.app/"
+          image={VoizerImg}
+          projectName="Voizer"
+          projectDescription="This project is my demonstration of using Bootstrap React Components as a tool to quickly and efficiently create an app. Put together within the span of a few weeks, I was able to put together a website that generates multiple invoices, via form input or JSON."
+          projectLink="https://voizer-ea083.web.app/"
         />
         <PortfolioItem
           className="sub-showcase-2"
@@ -49,9 +47,9 @@ export default function Portfolio() {
         </div>
         <PortfolioItem
           className="mini-1"
-          image={JacketImg}
-          projectName="Do I Need A Jacket?"
-          projectLink="https://do-i-need-a-jacket-2f8d2.web.app/"
+          image={StylaImg}
+          projectName="Styla"
+          projectLink="https://styla-landing-page.web.app/"
         />
         <PortfolioItem
           className="mini-2"

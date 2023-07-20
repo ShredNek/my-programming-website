@@ -141,12 +141,12 @@ export const PRINCIPLES: AllPrinciples = {
         theBigFour: {
           headingText: "The Big 4",
           description:
-            "Encapsulation. Abstraction. Polymorphism. Inheritance. These essential pillars of the OOP paradigm allow us to control data with great efficiency and cleanliness.",
+            "The abstraction of code keeps it safe from possible mutation. Encapsulation keep relevant code together, and inheritance and polymorphism reduce unnecessary code duplication. This is the essential behind what makes OOP efficient in creation of reusable in use of complex logic.",
         },
         solid: {
-          headingText: "SOLID",
+          headingText: "Abstract Classes",
           description:
-            "On top of the 4 basics, we have another best-practice for maintainable code. Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion.",
+            "Allowing guided flexibility greatly assists in the development of reusable code. In my experience this is commonly done in Java, but again, this is the essential behind what makes OOP efficient.",
         },
       },
     },

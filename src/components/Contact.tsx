@@ -3,12 +3,15 @@ import {
   BsFillPersonFill,
   BsFillEnvelopeFill,
   BsFillChatTextFill,
+  BsGithub,
+  BsInstagram,
 } from "react-icons/bs";
 import { HiQuestionMarkCircle } from "react-icons/hi";
 import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import SubmitSuccessBox from "./SubmitSuccessBox";
 import SubmitFailBox from "./SubmitFailBox";
+import FollowMeCard from "./FollowMeCard";
 
 // ??? I don't know how this worked, but it did... wtf
 interface IObjectKeys {
@@ -67,10 +70,10 @@ export default function Contact() {
   const sendEmail = () => {
     emailjs
       .send(
-        "service_fos85gd",
-        "template_xvz6q3f",
+        import.meta.env.VITE_EMAIL_API_KEY_1,
+        import.meta.env.VITE_EMAIL_API_KEY_2,
         returnDataFromRefs(),
-        "yzh3QmMeFSvpbkete"
+        import.meta.env.VITE_EMAIL_API_KEY_3
       )
       .catch((err) => {
         console.error("Unexpected Error: ", err);
@@ -189,6 +192,21 @@ export default function Contact() {
             Send!
           </button>
         </form>
+        <div id="follow-me">
+          <h2>Follow me!</h2>
+          <div id="follow-me-children">
+            <FollowMeCard
+              followLink={"https://github.com/ShredNek"}
+              followMeTitle={"GitHub"}
+              buttonChild={<BsGithub className="follow-me-icon" />}
+            />
+            <FollowMeCard
+              followLink={"https://www.instagram.com/daniel_lee_music/"}
+              followMeTitle={"Instagram"}
+              buttonChild={<BsInstagram className="follow-me-icon" />}
+            />
+          </div>
+        </div>
       </section>
     </>
   );

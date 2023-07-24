@@ -7,6 +7,7 @@ import Slider from "./Slider";
 import Portfolio from "./Portfolio";
 import Contact from "./Contact";
 import Principals from "./Principles";
+import Footer from "./Footer";
 
 export default function App() {
   // ? Component States
@@ -52,6 +53,7 @@ export default function App() {
       <Principals />
       <Portfolio />
       <Contact />
+      <Footer />
     </main>
   );
 }

@@ -8,6 +8,7 @@ import Portfolio from "./Portfolio";
 import Contact from "./Contact";
 import Principals from "./Principles";
 import Footer from "./Footer";
+import Certificates from "./Certificates";
 
 export default function App() {
   // ? Component States
@@ -52,6 +53,7 @@ export default function App() {
       <About />
       <Principals />
       <Portfolio />
+      <Certificates />
       <Contact />
       <Footer />
     </main>

@@ -22,19 +22,19 @@ export default function About() {
           <span>Who</span> I am.
         </h1>
         <p>
-          I am a passionate, dedicated, and zealous web designer. I specialise
-          in UX/UI design and working with front-end frameworks, such as React,
-          TypeScript, Scss, and many other tools.
+          I am a passionate, dedicated, and zealous web designer. I am a TypeScript
+          specialist, mainly working with front-end frameworks (React and Vue),
+          formulating algorithms within Node.js, and leveraging styling languages
+          such as Scss, Bootstrap and Headless UI, with a little bit of SapUI5 experience too.
         </p>
         <br />
         <p>
-          I am no stranger to back-end projects either, as I have complete
-          numerous projects involving the processing of data from controllers
-          and then performing CRUD operations, for example.
+          I have a deep understanding of the foundations of web development, and I am now
+          getting intimate with more advanced techniques within TypeScript and beyond.
         </p>
         <br />
         <p>
-          As of {getCurrYear()}, I have had {getCurrExperience()} years of
+          As of {getCurrYear()}, I have over {getCurrExperience()} years of
           experience as a developer. Please see my portfolio below to view all
           of my work.
         </p>
